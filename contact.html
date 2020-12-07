@@ -1,0 +1,172 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Vanessa Ma</title>
+        <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v5.13.0/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css2?css2?family=Rambla:500,700" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Muli:400,400i,800,800i" rel="stylesheet" type="text/css" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="css/styles.css" rel="stylesheet" />
+
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-174267683-1"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-174267683-1');
+        </script>
+
+        <!-- js for email setup -->
+        <script language="Javascript1.2">
+            function validateForm() {
+            var name =  document.getElementById('name').value;
+            if (name == "") {
+                document.querySelector('.status').innerHTML = "Name cannot be empty";
+                return false;
+            }
+            var email =  document.getElementById('email').value;
+            if (email == "") {
+                document.querySelector('.status').innerHTML = "Email cannot be empty";
+                return false;
+            } else {
+                var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                if(!re.test(email)){
+                    document.querySelector('.status').innerHTML = "Email format invalid";
+                    return false;
+                }
+            }
+            var subject =  document.getElementById('subject').value;
+            if (subject == "") {
+                document.querySelector('.status').innerHTML = "Subject cannot be empty";
+                return false;
+            }
+            var message =  document.getElementById('message').value;
+            if (message == "") {
+                document.querySelector('.status').innerHTML = "Message cannot be empty";
+                return false;
+            }
+            document.querySelector('.status').innerHTML = "Sending...";
+            }
+
+            document.getElementById('status').innerHTML = "Sending...";
+            formData = {
+            'name'     : $('input[name=name]').val(),
+            'email'    : $('input[name=email]').val(),
+            'subject'  : $('input[name=subject]').val(),
+            'message'  : $('textarea[name=message]').val()
+            };
+
+
+            $.ajax({
+            url : "mail.php",
+            type: "POST",
+            data : formData,
+            success: function(data, textStatus, jqXHR)
+            {
+
+            $('#status').text(data.message);
+            if (data.code) //If mail was sent successfully, reset the form.
+            $('#contact-form').closest('form').find("input[type=text], textarea").val("");
+            },
+            error: function (jqXHR, textStatus, errorThrown)
+            {
+            $('#status').text(jqXHR);
+            }
+            });
+        </script>
+    </head>
+    <body id="page-top">
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
+            <a class="navbar-brand js-scroll-trigger" href="index.html">
+                <span class="d-block d-lg-none">Vanessa Ma</span>
+                <span class="d-none d-lg-block"><img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="assets/img/profile.jpg" alt=""></img></span>
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <div class="container-fluid p-0">
+            <section class="header-section mb-4">
+                <section class="header-section-content">
+                    <div class="social-icons d-flex mb-5 flex-column flex-md-row justify-content-end">
+                        <a class="social-icon" href="https://www.linkedin.com/in/vanessa-ma/"><i class="fab fa-linkedin-in"></i></a>
+                        <a class="social-icon" href="https://github.com/vma101"><i class="fab fa-github"></i></a>
+                        <a class="social-icon" href="https://www.instagram.com/ma.rinate"><i class="fab fa-instagram"></i></a>
+                        <a class="social-icon" href="https://www.twitter.com/vma_101"><i class="fab fa-twitter"></i></a>
+                        <a class="social-icon" href="mailto:ykvanessama@gmail.com"><i class="fas fa-pen"></i></a>
+                    </div> 
+                    <p class="text-primary">I can be reached by <a href="mailto:ykvanessama@gmail.com" class="font-weight-bold">email</a>, and will generally respond within 3 business days.</p>
+                    <p>Work samples and resume available on request.</p>
+                <!-- <div class="row">
+            
+                    <div class="col-md-9 mb-md-0 mb-5">
+                        <form id="contact-form" name="contact-form" action="mail.php" method="POST">
+            
+                            <div class="row d-flex align-items-center">
+            
+                                <div class="col-md-6">
+                                    <div class="md-form mb-0">
+                                        <input type="text" id="name" name="name" class="form-control">
+                                        <label for="name" class="">Your name</label>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="md-form mb-0">
+                                        <input type="text" id="email" name="email" class="form-control">
+                                        <label for="email" class="">Your email</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="md-form mb-0">
+                                        <input type="text" id="subject" name="subject" class="form-control">
+                                        <label for="subject" class="">Subject</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+            
+                                <div class="col-md-12">
+            
+                                    <div class="md-form">
+                                        <textarea type="text" id="message" name="message" rows="2" class="form-control md-textarea"></textarea>
+                                        <label for="message">Your message</label>
+                                    </div>
+            
+                                </div>
+                            </div>
+            
+                        </form>
+            
+                        <div class="text-center text-md-left">
+                            <a class="btn btn-primary" onclick="validateForm();">Send</a>
+                        </div>
+                        <div class="status"></div>
+                    </div> -->
+                    
+                </section>            
+            </section>
+            <!--Section: Contact v.2-->
+
+        </div>
+    </body>
+</html>
